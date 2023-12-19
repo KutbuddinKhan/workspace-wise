@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1702896130540,
+      "tag": "0000_cold_miek",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1702955819645,
+      "tag": "0001_round_northstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702956575160,
+      "tag": "0002_cultured_spiral",
+      "breakpoints": true
+    }
+  ]
+}
