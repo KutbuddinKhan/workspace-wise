@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -5,6 +6,9 @@ import db from '@/lib/supabase/db'
 import { ThemeProvider } from '@/lib/providers/next-theme-provider'
 import { DM_Sans } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
+import { SupabaseUserProvider } from '@/lib/providers/supabase-user-provider'
+import { Toaster } from '@/components/ui/toaster'
+import AppStateProvider from '@/lib/providers/state-provider';
 
 const inter = DM_Sans({ subsets: ['latin'] })
 
@@ -27,7 +31,12 @@ export default function RootLayout({
           defaultTheme='dark'
           enableSystem
         >
-          {children}
+          <AppStateProvider>
+          <SupabaseUserProvider>
+            {children}
+            <Toaster />
+          </SupabaseUserProvider>
+          </AppStateProvider>
         </ThemeProvider>
       </body>
     </html>
