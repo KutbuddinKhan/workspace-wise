@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { AuthUser } from "@supabase/supabase-js";
+import { AuthUser } from "@supabase/supabase-js"
 import { Subscription } from "../supabase/supabase.types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 type SupabaseUserContextType = {
   user: AuthUser | null;
   subscription: Subscription | null;
-};
+}
 
 const SupabaseUserContext = createContext<SupabaseUserContextType>({
   user: null,
@@ -32,34 +32,34 @@ export const SupabaseUserProvider: React.FC<SupabaseUserProviderProps> = ({
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const { toast } = useToast();
 
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient()
 
-  //Fetch the user details
-  //subscrip
+  // fetch the user details
+  // fetch the subscription detail
   useEffect(() => {
     const getUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        console.log(user);
+        console.log(user)
         setUser(user);
-        const { data, error } = await getUserSubscriptionStatus(user.id);
+        const { data, error } = await getUserSubscriptionStatus(user.id)
         if (data) setSubscription(data);
         if (error) {
           toast({
-            title: "Unexpected Error",
+            title: 'Unexpected Error',
             description:
-              "Oppse! An unexpected error happened. Try again later.",
-          });
+              'Oppse! An unexpected error happened. Try again later.',
+          })
         }
       }
     };
     getUser();
-  }, [supabase, toast]);
+  }, [supabase, toast])
+
   return (
     <SupabaseUserContext.Provider value={{ user, subscription }}>
       {children}
     </SupabaseUserContext.Provider>
-  );
-};
+  )
+}
+
