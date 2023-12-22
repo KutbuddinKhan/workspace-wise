@@ -5,6 +5,8 @@ import { getCollaboratingWorkspaces, getFolders, getPrivateWorkspaces, getShared
 import { redirect } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import WorkspaceDropdown from './workspace-dropdown';
+import PlanUsage from './plan-usage';
+import NativeNavigation from './native-navigation';
 
 
 interface SidebarProps {
@@ -59,6 +61,11 @@ const Sidebar: React.FC<SidebarProps> = async ({
                         ...sharedWorkspaces,
                     ].find((workspace) => workspace.id === params.workspaceId)}
                 />
+                <PlanUsage
+                    foldersLength={workspaceFolderData?.length || 0}
+                    subscription={subscriptionData}
+                />
+                <NativeNavigation myWorkspaceId={params.workspaceId} />
             </div>
         </aside>
     )
